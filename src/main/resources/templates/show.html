@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Viewing</title>
+</head>
+<body>
+<div>
+    <form method="get" action="index">
+        <button type="submit">Back to main</button>
+    </form>
+</div>
+<div>
+    <if test="${not empty data}">
+        <table style="border: 1px solid black; border-collapse: collapse;">
+            <forEach items="${data}" var="row">
+                <tr>
+                    <forEach items="${row.value}" var="cell">
+                        <td style="border:1px solid black;height:20px;width:100px;
+                      background-color:${cell.bgColor};color:${cell.textColor};
+                      font-weight:${cell.textWeight};font-size:${cell.textSize}pt;">
+                            ${cell.content}
+                        </td>
+                    </forEach>
+                </tr>
+            </forEach>
+        </table>
+    </if>
+</div>
+</body>
+</html>
