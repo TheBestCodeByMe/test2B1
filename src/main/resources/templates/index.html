@@ -7,52 +7,52 @@
 </head>
 <body>
 <h1>Welcome</h1>
-<form action="#" th:action="@{/main}" th:object="${mess}" method="POST">
+<!--<form action="#" th:action="@{/main}" th:object="${mess}" method="POST">
     <table>
         <tr>
             <th th:text="#{message}"></th></th>
         </tr>
     </table>
     <form/>
-    <!--
-    <div>
-        <form enctype="multipart/form-data" method="post" action="import">
-            <p><input type="file" name="file" accept=".xsl,.xslt">
-                <input type="submit" value="Import and view data"></p>
-        </form>
-        <p th:text="#{message}">
-        <table border="1">
-            <tr>
-                <th>Saved files:</th>
-            </tr>
+    -->
+<div>
+    <form enctype="multipart/form-data" method="post" action="import">
+        <p><input type="file" name="file" accept=".xsl,.xslt">
+            <input type="submit" value="Import and view data"></p>
+    </form>
+    <!--<p th:text="#{message}">-->
+    <table border="1">
+        <tr>
+            <th>Saved files:</th>
+        </tr>
 
-            <tr th:each="lst : ${files}">
-                <td th:utext="${lst}">brand</td>
-            </tr>
+        <tr th:each="lst : ${files}">
+            <td th:utext="${lst}">brand</td>
+        </tr>
 
-        </table>
-    </div>
-    <div>
-        <form enctype="multipart/form-data" method="post" action="saveFileJSon">
-            <p><input type="file" name="fi">
-                <input type="submit" value="Save file in JSon"></p>
-        </form>
-    </div>
-    <div>
-        <form method="post" action="savePage">
-            <p><input type="url">
-                <input type="submit" value="Save web-page in file"></p>
-        </form>
-    </div>
-    <div>
-        <table style="border: 1px solid black; border-collapse: collapse;">
-            <th:tr th:each="row:${data}">
-                <th:td th:each="cell:${row.value}" style="border:1px; solid:black; height:20px; width: 100px;
+    </table>
+</div>
+<div>
+    <form enctype="multipart/form-data" method="post" action="saveFileJSon">
+        <p><input type="file" name="fi">
+            <input type="submit" value="Save file in JSon"></p>
+    </form>
+</div>
+<div>
+    <form method="post" action="savePage">
+        <p><input type="url">
+            <input type="submit" value="Save web-page in file"></p>
+    </form>
+</div>
+<div>
+    <table style="border: 1px solid black; border-collapse: collapse;">
+        <th:tr th:each="row:${data}">
+            <th:td th:each="cell:${row.value}" style="border:1px; solid:black; height:20px; width: 100px;
     background-color:${cell.bgColor}; color:${cell.textColor};
     font-weight:${cell.textWeight}; font-size:${cell.textSize}pt;" th:text="${cell.content}">
-                </th:td>
-            </th:tr>
-        </table>
-    </div>-->
+            </th:td>
+        </th:tr>
+    </table>
+</div>
 </body>
 </html>

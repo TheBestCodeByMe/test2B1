@@ -24,20 +24,19 @@ import java.util.stream.IntStream;
 
 public class ExcelHelper {
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-    static String[] HEADERs = {"NameBank", "Currency", "nameFIle", "dateSince",
+    /*static String[] HEADERs = {"NameBank", "Currency", "nameFIle", "dateSince",
             "dateTo", "fillingTime", "balanceAccNumber", "codeBalAcc", " DescriptionCl",
             "activeAmountInc", "passiveAmountInc", "activeAmountOut", "passiveAmountOut",
-            "debitAmount", "creditAmount"};
+            "debitAmount", "creditAmount"};*/
 
     static String SHEET = "All informations";
 
+    // проверка на excel-формат
     public static boolean hasExcelFormat(MultipartFile file) {
-        if (!TYPE.equals(file.getContentType())) {
-            return false;
-        }
-        return true;
+        return TYPE.equals(file.getContentType());
     }
 
+    // выгрузка из excel в список записей с учетом названия банка, файла и так далее
     public static List<Record> excelToRecords(InputStream is) {
         try {
             Workbook workbook = new XSSFWorkbook(is);
@@ -142,6 +141,7 @@ public class ExcelHelper {
         }
     }
 
+    // чтение excel-файла с учётом стилей ячеек
     public Map<Integer, List<MyCell>> readExcel(String fileLocation) throws IOException {
 
         Map<Integer, List<MyCell>> data = new HashMap<>();
@@ -168,6 +168,7 @@ public class ExcelHelper {
         return data;
     }
 
+    // чтение данных ячеек
     private String readCellContent(Cell cell) {
         String content;
         switch (cell.getCellTypeEnum()) {
@@ -193,11 +194,10 @@ public class ExcelHelper {
         return content;
     }
 
+    // чтение стилей ячеек
     private Map<Integer, List<MyCell>> readHSSFWorkbook(FileInputStream fis) throws IOException {
         Map<Integer, List<MyCell>> data = new HashMap<>();
-        HSSFWorkbook workbook = null;
-        try {
-            workbook = new HSSFWorkbook(fis);
+        try (HSSFWorkbook workbook = new HSSFWorkbook(fis)) {
 
             HSSFSheet sheet = workbook.getSheetAt(0);
             for (int i = sheet.getFirstRowNum(); i <= sheet.getLastRowNum(); i++) {
@@ -236,10 +236,6 @@ public class ExcelHelper {
                         }
                     }
                 }
-            }
-        } finally {
-            if (workbook != null) {
-                workbook.close();
             }
         }
         return data;

@@ -27,18 +27,16 @@ public class MainController {
     @Value("${files}")
     private static List<String> files;
 
+    // Первоначальная страница
     @GetMapping(value = { "/main"})
     public ModelAndView index() {
         String mess = "Загрузите файл";
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("mess", mess);
-        message="qwerqwert";
-        modelAndView.addObject(
-                "message", message
-        );
         return modelAndView;
     }
 
+    // Импорт из файла
     @PostMapping("/import")
     //public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
     public ModelAndView uploadFile(@RequestParam("file") MultipartFile file) {
@@ -72,12 +70,14 @@ public class MainController {
         //return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
     }
 
+    // Сохранение страницы
     @GetMapping(value = {"/savePage"})
     public String savePage(String url) throws Exception {
         workWithExcelService.saveInFile(url);
         return "index";
     }
 
+    // сохранение в JSON
     @GetMapping(value = {"/saveFileJSon"})
     public String saveInJSON(@RequestParam("fil") MultipartFile file) {
         if (ExcelHelper.hasExcelFormat(file)) {
@@ -91,7 +91,7 @@ public class MainController {
         return "index";
     }
 
-/*
+/* // Ещё одна возможность вывода данных, только уже из БД
     @GetMapping("/show")
     public ResponseEntity<List<Record>> getAllRecords() {
         try {

@@ -25,6 +25,7 @@ import java.util.Objects;
 public class WorkWithExcelServiceImpl implements WorkWithExcelService {
     private final RecordRepository recordRepository;
 
+    // сохранение в файл
     @Override
     public void save(MultipartFile file) {
         try {
@@ -35,17 +36,20 @@ public class WorkWithExcelServiceImpl implements WorkWithExcelService {
         }
     }
 
+    // вывод данных
     @Override
     public Map<Integer, List<MyCell>> show(String fileLocation) throws IOException {
         ExcelHelper excelHelper = new ExcelHelper();
         return excelHelper.readExcel(fileLocation);
     }
 
+    // возврат всех записей из БД
     @Override
     public List<Record> getAllRecords() {
         return recordRepository.findAll();
     }
 
+    // сохранение в файл
     @Override
     public void saveInFile(String uRL) throws Exception {
         OutputStream out = new FileOutputStream("d:/test.html");
@@ -71,6 +75,7 @@ public class WorkWithExcelServiceImpl implements WorkWithExcelService {
         }
     }
 
+    // сохранение в JSON
     @Override
     public void saveInJSon(MultipartFile file) throws IOException {
         List<Record> records = ExcelHelper.excelToRecords(file.getInputStream());

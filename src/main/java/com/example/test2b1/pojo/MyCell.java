@@ -1,7 +1,6 @@
 package com.example.test2b1.pojo;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Setter
